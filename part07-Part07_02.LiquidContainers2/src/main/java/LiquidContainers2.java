@@ -1,18 +1,16 @@
 
 import java.util.Scanner;
 
-public class LiquidContainers {
+public class LiquidContainers2 {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-
-        int firstValue = 0;
-        int secondValue = 0;
+        Container container1 = new Container();
+        Container container2 = new Container();
 
         while (true) {
-
-            System.out.println("First: " + firstValue + "/100");
-            System.out.println("Second: " + secondValue + "/100");
+            System.out.println("First: " + container1.contains() + "/100");
+            System.out.println("Second: " + container2.contains() + "/100");
 
             String input = scan.nextLine();
 
@@ -29,35 +27,23 @@ public class LiquidContainers {
             String command = parts[0];
             int amount = Integer.valueOf(parts[1]);
 
-
             if (command.equals("add") && amount > 0) {
-
-                firstValue += amount;
-                if (firstValue >= 100) {
-                    firstValue = 100;
-                }
-
+                container1.add(amount);
             }
 
             if (command.equals("move") && amount > 0) {
-
-                if (firstValue < amount) {
-                    amount = firstValue;
+                if (container1.contains() > amount) {
+                    container2.add(amount);
                 }
-                secondValue += amount;
-                firstValue -= amount;
-
-                if (secondValue > 100) {
-                    secondValue = 100;
+                if (container1.contains() == amount || container1.contains() < amount) {
+                    container2.add(container1.contains());
                 }
+                container1.remove(amount);
+
             }
 
             if (command.equals("remove") && amount > 0) {
-                secondValue -= amount;
-                if (secondValue < 0) {
-                    secondValue = 0;
-                }
-
+                container2.remove(amount);
             }
 
         }
